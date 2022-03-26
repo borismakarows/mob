@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,15 +10,18 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player")]
     Touch touch;
     [SerializeField] float speedModifier = 0.01f;
+    [SerializeField] Vector2 boundsX;
     
     [Header("Bullet")]
     [SerializeField] GameObject bullet;
-    [SerializeField] GameObject bulletsParent;
+    [SerializeField] Vector3 bulletDistanceToPlayer;
     [SerializeField] float bulletDelay;
     float bulletDelayAtStart;
+    GameObject bulletsParent;
 
     void Awake()
     {
+        bulletsParent = GameObject.FindGameObjectWithTag("Parent");
         bulletDelayAtStart = bulletDelay;
     }
 
@@ -26,16 +30,29 @@ public class PlayerMovement : MonoBehaviour
         bulletDelay = 0f;
     }
 
-   
+    
+
     void Update()
     {
+        if (transform.position.x > boundsX.x)
+        {
+            transform.position = new Vector3(boundsX.x,transform.position.y,transform.position.z);
+        }
+
+        if (transform.position.x < boundsX.y)
+        {
+            transform.position = new Vector3(boundsX.y, transform.position.y,transform.position.z);
+        }
+        
         if(Input.touchCount > 0)
         {
             touch = Input.GetTouch(0);
             bulletDelay -= Time.deltaTime;
             if (bulletDelay < 0)
             {
-                Vector3 instancePos = new Vector3(transform.position.x, 3.16f, transform.position.z + 0.7f);
+                Vector3 instancePos = new Vector3(transform.position.x + bulletDistanceToPlayer.x,
+                                                   transform.position.y + bulletDistanceToPlayer.y,
+                                                   transform.position.z + bulletDistanceToPlayer.z);
                 Instantiate(bullet, instancePos, Quaternion.identity, bulletsParent.transform);
                 bulletDelay = bulletDelayAtStart;
             }
@@ -49,7 +66,15 @@ public class PlayerMovement : MonoBehaviour
                     transform.position.z);
             }
         }
+        else if (Input.touchCount == 0)
+        {
+            bulletDelay -= Time.deltaTime;
+        }
 
+    }
 
+    void InitBoundsX()
+    {
+        
     }
 }
