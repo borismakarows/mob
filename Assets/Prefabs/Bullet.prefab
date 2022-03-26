@@ -125,9 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afd349e43bc84114d8b5a54ba94f7765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletParent: {fileID: 8145828683653049339, guid: 80f6b225572e40745b52353654c7a5e5, type: 3}
   target: {fileID: 5452870439326136249, guid: 8e32bf347d0bf1045ab29aa5c4080118, type: 3}
-  bulletSpawnPosDistance: {x: 0.3, y: 0, z: -0.16}
-  spawnDelay: 0.01
-  bulletSpeed: 5
+  bulletSpawnPosDistance: {x: 0.35, y: 0, z: -0.2}
+  bulletSpeed: 4
   firstTime: 1
+  inZone: 0

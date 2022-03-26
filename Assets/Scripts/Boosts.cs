@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Boosts : MonoBehaviour
 {
-    [SerializeField]  string type;
+    [Tooltip("Multiply,Plus")]
+    [SerializeField]  string type = "Multiply, Plus";
     [SerializeField]  int number;
+    
+    [HideInInspector] public const string multiplyKey = "Multiply";
+    [HideInInspector] public const string plusKey = "Plus";
+    
 
     public int GetNumber()
     {
