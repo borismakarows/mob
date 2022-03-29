@@ -8,6 +8,8 @@ TagManager:
   - Boost
   - Parent
   - Target
+  - CanonBall
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - Bullets
   - Boost
   - Target
-  - 
+  - canonBall
   - 
   - 
   - 

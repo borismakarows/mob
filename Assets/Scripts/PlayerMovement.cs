@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     float bulletDelayAtStart;
     GameObject bulletsParent;
 
+
     void Awake()
     {
         bulletsParent = GameObject.FindGameObjectWithTag("Parent");
@@ -34,17 +35,26 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        InitBoundsX();
+        Move();
+    }
+
+   void InitBoundsX()
+    {
         if (transform.position.x > boundsX.x)
         {
-            transform.position = new Vector3(boundsX.x,transform.position.y,transform.position.z);
+            transform.position = new Vector3(boundsX.x, transform.position.y, transform.position.z);
         }
 
         if (transform.position.x < boundsX.y)
         {
-            transform.position = new Vector3(boundsX.y, transform.position.y,transform.position.z);
+            transform.position = new Vector3(boundsX.y, transform.position.y, transform.position.z);
         }
-        
-        if(Input.touchCount > 0)
+    }
+
+   void Move()
+    {
+        if (Input.touchCount > 0)
         {
             touch = Input.GetTouch(0);
             bulletDelay -= Time.deltaTime;
@@ -56,10 +66,10 @@ public class PlayerMovement : MonoBehaviour
                 Instantiate(bullet, instancePos, Quaternion.identity, bulletsParent.transform);
                 bulletDelay = bulletDelayAtStart;
             }
-            
+
             if (touch.phase == UnityEngine.TouchPhase.Moved)
             {
-            
+
                 transform.position = new Vector3(
                     transform.position.x + touch.deltaPosition.x * speedModifier * Time.deltaTime,
                     transform.position.y,
@@ -70,11 +80,7 @@ public class PlayerMovement : MonoBehaviour
         {
             bulletDelay -= Time.deltaTime;
         }
-
     }
 
-    void InitBoundsX()
-    {
-        
-    }
+
 }

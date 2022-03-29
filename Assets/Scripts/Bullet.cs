@@ -6,20 +6,27 @@ public class Bullet : MonoBehaviour
 {
     [Header("Consts")]
     [HideInInspector] public GameObject target;
-    Transform bulletParent;
     [SerializeField] Vector3 bulletSpawnPosDistance;
+    Transform bulletParent;
+    Animator myAnimator;
     
+
     [Header("Game Feel")]
     [SerializeField] float bulletSpeed = 1f;
     [SerializeField] float spawnDelay = 0.2f;
-    
-    [HideInInspector] public bool firstTime = true;
+    [SerializeField] float destroyDelay = 0.2f;
 
+    [Header("Conditions")]
+    [HideInInspector] public bool isAttacking;
+    [HideInInspector] public bool firstTime = true;
     [HideInInspector] public bool inZone;
 
-    
-    
-    
+
+    void Awake()
+    {
+        myAnimator = GetComponent<Animator>();
+    }
+
     void Start()
     {
         bulletParent = GameObject.FindGameObjectWithTag("Parent").transform;
@@ -30,31 +37,41 @@ public class Bullet : MonoBehaviour
     {
         if (target == null) { return; } 
         transform.position = Vector3.MoveTowards(transform.position, target.transform.position, bulletSpeed * Time.deltaTime);
+        myAnimator.SetBool("Attack01", isAttacking);
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Boost")) 
         {
+            
             Boosts currentBoost = other.gameObject.GetComponent<Boosts>();
-            if (currentBoost.GetSign() == Boosts.multiplyKey && firstTime)
-            { 
-                firstTime = false;
-
-                StartCoroutine(Multiplication(currentBoost.GetNumber()));
-            }
-            else if (currentBoost.GetSign() == Boosts.plusKey && firstTime)
+            if (currentBoost.GetNumber() > 0)
             {
-                firstTime = false;
-                StartCoroutine(Plus(currentBoost.GetNumber()));
-            }    
+                if (currentBoost.GetSign() == Boosts.multiplyKey && firstTime)
+                {
+                    firstTime = false;
+
+                    StartCoroutine(Multiplication(currentBoost.GetNumber()));
+                }
+                else if (currentBoost.GetSign() == Boosts.plusKey && firstTime)
+                {
+                    firstTime = false;
+                    StartCoroutine(Plus(currentBoost.GetNumber()));
+                }
+            }
+            
         }   
         else if (other.CompareTag("Target"))
         {
-            Health targetHealth = other.gameObject.GetComponent<Health>();
-            targetHealth.ModifyHealth(-1);
-            Destroy(gameObject);
+            StartCoroutine(DestroyBullet(destroyDelay, other.gameObject));
         }
+        else if (other.CompareTag("CanonBall"))
+        {
+            if (other.gameObject != null) { Destroy(other.gameObject,destroyDelay); }
+            Destroy(gameObject, destroyDelay);
+        }
+
     }
 
     void OnTriggerExit(Collider other)
@@ -63,6 +80,15 @@ public class Bullet : MonoBehaviour
         {
             firstTime = true;
         }
+    }
+
+    IEnumerator DestroyBullet(float delay, GameObject otherGameObject)
+    {
+        isAttacking = true;
+        Health targetHealth = otherGameObject.GetComponent<Health>();
+        targetHealth.ModifyHealth(-1);
+        yield return new WaitForSecondsRealtime(delay);
+        Destroy(gameObject);
     }
 
     IEnumerator Multiplication(int number)

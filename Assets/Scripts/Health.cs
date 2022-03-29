@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
     {
         healthBar.SetHealth(currentHealth, maxHealth);
         Die();
-        Debug.Log(currentHealth);
+
     }
 
     void Die()

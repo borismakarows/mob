@@ -455,7 +455,7 @@ Animator:
   m_GameObject: {fileID: 5956300823722603163}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: a58d63122b09e9144938cd6a1ece4824, type: 3}
-  m_Controller: {fileID: 9100000, guid: b60dc9aa529b314489f628aa3b57c470, type: 2}
+  m_Controller: {fileID: 9100000, guid: dd2ee9434d830864b99e212086bb0958, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -491,8 +491,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.4017501, z: 0.6654444}
-  m_Center: {x: 0, y: 0.69271207, z: 0.04528761}
+  m_Size: {x: 1, y: 1.4017501, z: 2.7127714}
+  m_Center: {x: 0, y: 0.69271207, z: 1.0689511}
 --- !u!114 &2933935541680010408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,6 +509,8 @@ MonoBehaviour:
   bulletSpawnPosDistance: {x: -1.2, y: 0, z: -1}
   bulletSpeed: 5
   spawnDelay: 0.2
+  destroyDelay: 0.4
+  isAttacking: 0
   firstTime: 1
   inZone: 0
 --- !u!1 &5956300823722603165
