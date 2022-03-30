@@ -5,9 +5,13 @@ using TMPro;
 
 public class Boosts : MonoBehaviour
 {
-    [Tooltip("Multiply,Plus")]
-    [SerializeField]  string type = "Multiply, Plus";
-    [SerializeField]  int number;
+    [Tooltip("Choose one Operation:" +
+        "\nif you choose two options default will be multiply" + "\nIf you don't choose any option default will be Plus")]
+    [SerializeField] bool Multiply;
+    [SerializeField] bool Plus;
+    string operation = "Multiply, Plus";
+
+    [SerializeField] int number;
     TextMeshProUGUI numberText;
 
 
@@ -18,11 +22,12 @@ public class Boosts : MonoBehaviour
     {
         Canvas mycanvas = GetComponentInChildren<Canvas>();
         numberText = GetComponentInChildren<TextMeshProUGUI>();
-        
+
     }
-    void Start()
+
+    void Update()
     {
-        WriteSign();
+        Sign();
     }
 
     public int GetNumber()
@@ -31,19 +36,22 @@ public class Boosts : MonoBehaviour
     }
 
     public string GetSign()
-    {
-        return type;
+    { 
+        return operation;
     }
 
-    void WriteSign()
+    void Sign()
     {
-        if (type == multiplyKey)
+        Plus = !Multiply;
+        if (Multiply)
         {
-            numberText.text = number.ToString();
+            operation = multiplyKey;
+            numberText.text = "x" + number.ToString();
         }
-        else if (type == plusKey)
+        else
         {
-            numberText.text = number.ToString();
+            operation = plusKey;
+            numberText.text = "+" + number.ToString();
         }
     }
 }

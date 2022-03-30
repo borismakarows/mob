@@ -438,7 +438,7 @@ Transform:
   m_GameObject: {fileID: 5956300823722603163}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.81, y: 2.528, z: -11.97}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 5956300823722831689}
   - {fileID: 5956300823722831527}
@@ -508,7 +508,7 @@ MonoBehaviour:
   target: {fileID: 0}
   bulletSpawnPosDistance: {x: -1.2, y: 0, z: -1}
   bulletSpeed: 5
-  spawnDelay: 0.2
+  spawnDelay: 0.1
   destroyDelay: 0.4
   isAttacking: 0
   firstTime: 1

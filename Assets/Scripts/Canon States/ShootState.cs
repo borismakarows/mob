@@ -4,23 +4,37 @@ using UnityEngine;
 
 public class ShootState : CanonState
 {
+    bool inBounds;
+
     public override void Update()
     {
-        
-        bool inBounds = parent.Target.position.z > parent.minBoundz &&
-                        parent.Target.position.z < parent.maxBoundZ;
-
-        
-        if (parent.Target != null && inBounds)
+        if (parent.targets.Length == 0)
         {
-            parent.Rotator.LookAt(parent.Target.position + parent.AimOffset);
+            parent.Target = null;
         }
 
-        else
+        if (parent.Target != null)
+        {
+            inBounds = parent.Target.position.z > parent.minBoundz &&
+            parent.Target.position.z < parent.maxBoundZ;
+
+            parent.Rotator.LookAt(parent.Target.position + parent.AimOffset);
+            if (!inBounds)
+            {
+                parent.Target = null;
+            }
+        }
+
+        if (parent.Target == null)
         {
             parent.ChangeState(new IdleState());
-        }
+        }        
+    }
 
+    public override void Enter(Canon parent)
+    {
+        base.Enter(parent);
+        parent.Animator.SetBool("Shoot", true);
     }
 
 }

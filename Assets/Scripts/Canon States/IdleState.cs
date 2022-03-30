@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class IdleState : CanonState
 {
-    
+    public override void Enter(Canon parent)
+    {
+        base.Enter(parent);
+        parent.Animator.SetBool("Shoot", false);
+    }
+
     public override void Update()
     {
         base.Update();

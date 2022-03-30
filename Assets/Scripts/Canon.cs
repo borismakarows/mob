@@ -25,7 +25,8 @@ public class Canon : MonoBehaviour
     [SerializeField] Transform rotator;
     [SerializeField] Transform ghostRotator;
     [SerializeField] Transform canonBarrel;
-    
+    [SerializeField] GameObject projectile;
+    [SerializeField] Animator animator;
     
 
 
@@ -34,6 +35,7 @@ public class Canon : MonoBehaviour
     public Transform GhostRotator { get => ghostRotator; set => ghostRotator = value; }
     public float RotationSpeed { get => rotationSpeed; set => rotationSpeed = value; }
     public Transform CanonBarrel { get => canonBarrel; set => canonBarrel = value; }
+    public Animator Animator { get => animator; set => animator = value; }
 
     protected void Start()
     {
@@ -48,13 +50,20 @@ public class Canon : MonoBehaviour
         currentState.Update();
     }
 
+    public void Shoot()
+    {
+        Quaternion headingDirection = Quaternion.FromToRotation(projectile.transform.forward, CanonBarrel.forward);
+        Instantiate(projectile, CanonBarrel.position, headingDirection).GetComponent<Projectile>().Direction = CanonBarrel.forward;
+    }
+
+    // if you activate this, you can hide from canon.
     public bool CanSeeTarget(Vector3 direction, Vector3 origin, string tag)
     {
         RaycastHit hit;
         if (Physics.Raycast (origin, direction ,
             out hit,Mathf.Infinity,layerMask))
         {
-            if (hit.collider.tag == "Bullet")
+            if (hit.collider.CompareTag("Bullet"))
             {
                 return true;
             }
