@@ -9,10 +9,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] Vector3 bulletSpawnPosDistance;
     Transform bulletParent;
     Animator myAnimator;
-    
 
-    Canon canon;
-    
+    Health myHealth;  
 
     [Header("Game Feel")]
     [SerializeField] float bulletSpeed = 1f;
@@ -27,8 +25,8 @@ public class Bullet : MonoBehaviour
 
     void Awake()
     {
+        myHealth = GetComponent<Health>();
         myAnimator = GetComponent<Animator>();
-        canon = FindObjectOfType<Canon>();
     }
 
     void Start()
@@ -73,9 +71,8 @@ public class Bullet : MonoBehaviour
 
         else if (other.CompareTag("CanonBall"))
         {
-            Destroy(gameObject);
+            myHealth.ModifyHealth(-1);
             Destroy(other.gameObject);
-            canon.Target = null;
         }
 
     }
@@ -92,12 +89,14 @@ public class Bullet : MonoBehaviour
     {
         isAttacking = true;
         Health targetHealth = otherGameObject.GetComponent<Health>();
-        targetHealth.ModifyHealth(-1);
+        targetHealth.ModifyHealth(Mathf.FloorToInt(-myHealth.GetCurrentHealth()));
+        
         yield return new WaitForSecondsRealtime(delay);
-        Destroy(gameObject);
+        
+        myHealth.ModifyHealth(Mathf.FloorToInt(-myHealth.GetCurrentHealth()));
     }
 
-    // instantiate in a pattern by using mod. // Berkay Sert
+    
     IEnumerator Multiplication(int number)
     {
         List<GameObject> currentClones = new List<GameObject>();
@@ -112,7 +111,8 @@ public class Bullet : MonoBehaviour
                                      bulletSpawnPosDistance.x * oppositeSpawn[0], 0, bulletSpawnPosDistance.z);
 
 
-                GameObject clone = Instantiate(gameObject, transform.position + bulletSpawnPosDistance2, Quaternion.identity, bulletParent);
+                GameObject clone = Instantiate(gameObject, 
+                                                transform.position + bulletSpawnPosDistance2, Quaternion.identity, bulletParent);
 
                 clone.GetComponent<Bullet>().firstTime = false;
                 currentClones.Add(clone);
@@ -124,7 +124,8 @@ public class Bullet : MonoBehaviour
                                          bulletSpawnPosDistance.x * oppositeSpawn[0], 0, bulletSpawnPosDistance.z);
 
 
-                GameObject clone = Instantiate(gameObject, currentClones[currentClones.Count - 1].transform.position + bulletSpawnPosDistance2, Quaternion.identity, bulletParent);
+                GameObject clone = Instantiate(gameObject, 
+                                                currentClones[currentClones.Count - 1].transform.position + bulletSpawnPosDistance2, Quaternion.identity, bulletParent);
 
                 clone.GetComponent<Bullet>().firstTime = false;
                 currentClones.Add(clone);
@@ -135,7 +136,8 @@ public class Bullet : MonoBehaviour
                 Vector3 bulletSpawnPosDistance2 = new Vector3(
                                        oppositeSpawn[1] * 2 * bulletSpawnPosDistance.x, 0, 0);
 
-                GameObject clone = Instantiate(gameObject, currentClones[currentClones.Count - 1].transform.position + bulletSpawnPosDistance2, Quaternion.identity, bulletParent);
+                GameObject clone = Instantiate(gameObject, 
+                                              currentClones[currentClones.Count - 1].transform.position + bulletSpawnPosDistance2, Quaternion.identity, bulletParent);
 
                 clone.GetComponent<Bullet>().firstTime = false;
                 currentClones.Add(clone);
@@ -146,7 +148,8 @@ public class Bullet : MonoBehaviour
                 Vector3 bulletSpawnPosDistance2 = new Vector3(
                                           bulletSpawnPosDistance.x * oppositeSpawn[0], 0, bulletSpawnPosDistance.z);
 
-                GameObject clone = Instantiate(gameObject, currentClones[currentClones.Count - 1].transform.position + bulletSpawnPosDistance2, Quaternion.identity, bulletParent);
+                GameObject clone = Instantiate(gameObject, 
+                                               currentClones[currentClones.Count - 1].transform.position + bulletSpawnPosDistance2, Quaternion.identity, bulletParent);
 
                 clone.GetComponent<Bullet>().firstTime = false;
                 currentClones.Add(clone);
@@ -171,7 +174,8 @@ public class Bullet : MonoBehaviour
                                          bulletSpawnPosDistance.x * oppositeSpawn[0], 0, bulletSpawnPosDistance.z);
 
 
-                    GameObject clone = Instantiate(gameObject, transform.position + bulletSpawnPosDistance2, Quaternion.identity, bulletParent);
+                    GameObject clone = Instantiate(gameObject,
+                                                    transform.position + bulletSpawnPosDistance2, Quaternion.identity, bulletParent);
 
                     clone.GetComponent<Bullet>().firstTime = false;
                     currentClones.Add(clone);
@@ -183,7 +187,8 @@ public class Bullet : MonoBehaviour
                                          bulletSpawnPosDistance.x * oppositeSpawn[0], 0, bulletSpawnPosDistance.z);
 
 
-                GameObject clone = Instantiate(gameObject, currentClones[currentClones.Count - 1].transform.position + bulletSpawnPosDistance2, Quaternion.identity, bulletParent);
+                GameObject clone = Instantiate(gameObject,
+                                                currentClones[currentClones.Count - 1].transform.position + bulletSpawnPosDistance2, Quaternion.identity, bulletParent);
                   
                 clone.GetComponent<Bullet>().firstTime = false;
                 currentClones.Add(clone);
@@ -194,7 +199,8 @@ public class Bullet : MonoBehaviour
                    Vector3 bulletSpawnPosDistance2 = new Vector3(
                                           oppositeSpawn[1] * 2 * bulletSpawnPosDistance.x , 0, 0);
 
-                    GameObject clone = Instantiate(gameObject, currentClones[currentClones.Count - 1].transform.position + bulletSpawnPosDistance2, Quaternion.identity, bulletParent);
+                    GameObject clone = Instantiate(gameObject, 
+                                                    currentClones[currentClones.Count - 1].transform.position + bulletSpawnPosDistance2, Quaternion.identity, bulletParent);
 
                     clone.GetComponent<Bullet>().firstTime = false;
                     currentClones.Add(clone);
@@ -205,7 +211,8 @@ public class Bullet : MonoBehaviour
                     Vector3 bulletSpawnPosDistance2 = new Vector3(
                                               bulletSpawnPosDistance.x * oppositeSpawn[0], 0, bulletSpawnPosDistance.z);
 
-                    GameObject clone = Instantiate(gameObject, currentClones[currentClones.Count - 1].transform.position + bulletSpawnPosDistance2, Quaternion.identity, bulletParent);
+                    GameObject clone = Instantiate(gameObject, 
+                                                    currentClones[currentClones.Count - 1].transform.position + bulletSpawnPosDistance2, Quaternion.identity, bulletParent);
 
                     clone.GetComponent<Bullet>().firstTime = false;
                     currentClones.Add(clone);

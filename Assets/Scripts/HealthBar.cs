@@ -6,12 +6,23 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] Slider slider;
- 
-    public void SetHealth(float currentHealth, float maxHealth)
+    Health myHealth;
+
+    void Awake()
     {
-        slider.gameObject.SetActive(currentHealth > 0);
-        slider.value = currentHealth;
-        slider.maxValue = maxHealth;
-        slider.minValue = 0;
+        myHealth = GetComponent<Health>();    
     }
+
+    void Start()
+    {
+        slider.maxValue = myHealth.GetMaxHealth();
+        
+    }
+
+    void Update()
+    {
+        slider.value = myHealth.GetCurrentHealth();
+    }
+
+
 }

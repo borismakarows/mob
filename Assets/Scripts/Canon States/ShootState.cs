@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShootState : CanonState
 {
+
     bool inBounds;
 
     public override void Update()
@@ -28,7 +29,7 @@ public class ShootState : CanonState
         if (parent.Target == null)
         {
             parent.ChangeState(new IdleState());
-        }        
+        }
     }
 
     public override void Enter(Canon parent)

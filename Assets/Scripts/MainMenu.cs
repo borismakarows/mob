@@ -1,15 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject levelCanvas;
     [SerializeField] GameObject mainMenuCanvas;
+    [SerializeField] TextMeshProUGUI scoreTMP;
+    ScoreKeeper scoreKeeper;
+
+    void Awake()
+    {
+        DefaultMenu();
+    }
 
     void Start()
     {
-        DefaultMenu();
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
+    }
+
+    void Update()
+    {
+        scoreTMP.text = scoreKeeper.GetScore().ToString("000");
     }
 
     public void LevelsMenu()

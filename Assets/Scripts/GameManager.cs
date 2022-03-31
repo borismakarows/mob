@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour
-{
+{ 
     public static GameManager Instance;
 
     [SerializeField] GameObject loadingCanvas;
@@ -30,7 +30,9 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public async void LoadScene(int index)
+
+
+    async void LoadScene(int index)
     {
         var scene = SceneManager.LoadSceneAsync(index);
         scene.allowSceneActivation = false;

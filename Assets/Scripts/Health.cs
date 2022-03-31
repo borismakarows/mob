@@ -7,25 +7,39 @@ public class Health : MonoBehaviour
 {
     [SerializeField] float maxHealth = 1f;
     float currentHealth;
-    HealthBar healthBar;
+
+    Canon canon;
 
     void Awake()
     {
+        canon = FindObjectOfType<Canon>();
         currentHealth = maxHealth;
-        healthBar = GetComponent<HealthBar>();
     }
+
 
     void Update()
     {
-        healthBar.SetHealth(currentHealth, maxHealth);
         Die();
+    }
 
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
     }
 
     void Die()
     {
         if (currentHealth <= 0)
         {
+            if (gameObject.CompareTag("Bullet"))
+            {
+                canon.Target = null;
+            }
             Destroy(gameObject);
         }
     }

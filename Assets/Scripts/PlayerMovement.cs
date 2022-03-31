@@ -9,11 +9,14 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Player")]
     Touch touch;
+    PlayerUI playerUI;
     [SerializeField] float speedModifier = 0.01f;
-    [SerializeField] Vector2 boundsX;
+    public float minBoundsX;
+    public float maxBoundsX;
     
     [Header("Bullet")]
     [SerializeField] GameObject bullet;
+    [SerializeField] GameObject bigBullet;
     [SerializeField] Vector3 bulletDistanceToPlayer;
     [SerializeField] float bulletDelay;
     float bulletDelayAtStart;
@@ -24,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     {
         bulletsParent = GameObject.FindGameObjectWithTag("Parent");
         bulletDelayAtStart = bulletDelay;
+        playerUI = GetComponent<PlayerUI>();
     }
 
     void Start()
@@ -41,14 +45,14 @@ public class PlayerMovement : MonoBehaviour
 
    void InitBoundsX()
     {
-        if (transform.position.x > boundsX.x)
+        if (transform.position.x < minBoundsX)
         {
-            transform.position = new Vector3(boundsX.x, transform.position.y, transform.position.z);
+            transform.position = new Vector3(minBoundsX, transform.position.y, transform.position.z);
         }
 
-        if (transform.position.x < boundsX.y)
+        if (transform.position.x > maxBoundsX)
         {
-            transform.position = new Vector3(boundsX.y, transform.position.y, transform.position.z);
+            transform.position = new Vector3(maxBoundsX, transform.position.y, transform.position.z);
         }
     }
 
@@ -60,11 +64,26 @@ public class PlayerMovement : MonoBehaviour
             bulletDelay -= Time.deltaTime;
             if (bulletDelay < 0)
             {
+
                 Vector3 instancePos = new Vector3(transform.position.x + bulletDistanceToPlayer.x,
                                                    transform.position.y + bulletDistanceToPlayer.y,
                                                    transform.position.z + bulletDistanceToPlayer.z);
-                Instantiate(bullet, instancePos, Quaternion.identity, bulletsParent.transform);
+                
+                if (touch.phase == UnityEngine.TouchPhase.Began &&
+                    playerUI.ultiSlider.value == playerUI.ultiSlider.maxValue)
+                {
+                    playerUI.ResetSliderPoint();
+                    Instantiate(bigBullet, instancePos, Quaternion.identity, bulletsParent.transform);
+                }
+                
+                else
+                {
+                    playerUI.AddUltiPoint(10);
+                    Instantiate(bullet, instancePos, Quaternion.identity, bulletsParent.transform);
+                }
+                
                 bulletDelay = bulletDelayAtStart;
+
             }
 
             if (touch.phase == UnityEngine.TouchPhase.Moved)

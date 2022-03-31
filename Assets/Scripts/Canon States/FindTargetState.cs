@@ -11,10 +11,10 @@ public class FindTargetState : CanonState
         parent.Rotator.rotation = Quaternion.RotateTowards
                                     (parent.Rotator.rotation, parent.GhostRotator.rotation, Time.deltaTime * parent.RotationSpeed);
 
-        if (parent.Target.position.z >= parent.maxBoundZ) 
+        if (parent.Target.position.z >= parent.maxBoundZ)
         {
             parent.Target = null;
-            parent.ChangeState(new IdleState()); 
+            parent.ChangeState(new IdleState());
         }
 
 
@@ -33,4 +33,5 @@ public class FindTargetState : CanonState
             parent.ChangeState(new IdleState());
         }
     }
+
 }

@@ -148,7 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Multiply: 0
   Plus: 1
-  number: 2
+  number: 5
 --- !u!135 &251006992679520685
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -188,7 +188,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251006992838816790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -171.6}
+  m_LocalPosition: {x: 0, y: 0, z: -313.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 251006992576461474}
@@ -196,7 +196,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 6, y: 81.7}
+  m_AnchoredPosition: {x: 15.5, y: 198.6}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &251006992838816787

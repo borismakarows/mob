@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Canon : MonoBehaviour
 {
+    
     protected CanonState currentState;
 
     public Transform Target { get; set; }
-    
+
     public Quaternion DefaultRotation { get; set; }
 
     public Bullet[] targets;
@@ -27,7 +28,7 @@ public class Canon : MonoBehaviour
     [SerializeField] Transform canonBarrel;
     [SerializeField] GameObject projectile;
     [SerializeField] Animator animator;
-    
+
 
 
     public Vector3 AimOffset { get => aimOffset; set => aimOffset = value; }
@@ -60,8 +61,8 @@ public class Canon : MonoBehaviour
     public bool CanSeeTarget(Vector3 direction, Vector3 origin, string tag)
     {
         RaycastHit hit;
-        if (Physics.Raycast (origin, direction ,
-            out hit,Mathf.Infinity,layerMask))
+        if (Physics.Raycast(origin, direction,
+            out hit, Mathf.Infinity, layerMask))
         {
             if (hit.collider.CompareTag("Bullet"))
             {
@@ -73,7 +74,7 @@ public class Canon : MonoBehaviour
 
     public void ChangeState(CanonState newState)
     {
-       if (newState != null)
+        if (newState != null)
         {
             newState.Exit();
         }
@@ -81,7 +82,7 @@ public class Canon : MonoBehaviour
         newState.Enter(this);
     }
 
-    
+
 
     void OnTriggerEnter(Collider other)
     {

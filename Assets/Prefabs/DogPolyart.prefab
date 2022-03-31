@@ -422,6 +422,7 @@ GameObject:
   - component: {fileID: -2802737304089757611}
   - component: {fileID: 3567675562785306656}
   - component: {fileID: 2933935541680010408}
+  - component: {fileID: 517730819}
   m_Layer: 6
   m_Name: DogPolyart
   m_TagString: Bullet
@@ -508,11 +509,24 @@ MonoBehaviour:
   target: {fileID: 0}
   bulletSpawnPosDistance: {x: -1.2, y: 0, z: -1}
   bulletSpeed: 5
-  spawnDelay: 0.1
+  spawnDelay: 0.2
   destroyDelay: 0.4
   isAttacking: 0
   firstTime: 1
   inZone: 0
+--- !u!114 &517730819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5956300823722603163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eacce479c2eaad45b44faf3dad81671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1
 --- !u!1 &5956300823722603165
 GameObject:
   m_ObjectHideFlags: 0
