@@ -492,8 +492,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.4017501, z: 2.7127714}
-  m_Center: {x: 0, y: 0.69271207, z: 1.0689511}
+  m_Size: {x: 1, y: 1.3807507, z: 2.6533709}
+  m_Center: {x: 0, y: 0.7032118, z: 1.0392509}
 --- !u!114 &2933935541680010408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,8 +510,7 @@ MonoBehaviour:
   bulletSpawnPosDistance: {x: -1.2, y: 0, z: -1}
   bulletSpeed: 5
   spawnDelay: 0.2
-  destroyDelay: 0.4
-  isAttacking: 0
+  destroyDelay: 0.32
   firstTime: 1
   inZone: 0
 --- !u!114 &517730819
@@ -526,6 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eacce479c2eaad45b44faf3dad81671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
   maxHealth: 1
 --- !u!1 &5956300823722603165
 GameObject:

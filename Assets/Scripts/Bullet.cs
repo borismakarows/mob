@@ -10,15 +10,16 @@ public class Bullet : MonoBehaviour
     Transform bulletParent;
     Animator myAnimator;
 
-    Health myHealth;  
+    Health myHealth;
+    ScoreKeeper scoreKeeper;
 
     [Header("Game Feel")]
     [SerializeField] float bulletSpeed = 1f;
     [SerializeField] float spawnDelay = 0.2f;
     [SerializeField] float destroyDelay = 0.2f;
+    
 
     [Header("Conditions")]
-    [HideInInspector] public bool isAttacking;
     [HideInInspector] public bool firstTime = true;
     [HideInInspector] public bool inZone;
 
@@ -27,6 +28,7 @@ public class Bullet : MonoBehaviour
     {
         myHealth = GetComponent<Health>();
         myAnimator = GetComponent<Animator>();
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
     }
 
     void Start()
@@ -39,8 +41,9 @@ public class Bullet : MonoBehaviour
     {
         if (target == null) { return; } 
         transform.position = Vector3.MoveTowards(transform.position, target.transform.position, bulletSpeed * Time.deltaTime);
-        myAnimator.SetBool("Attack01", isAttacking);
     }
+
+    
 
     void OnTriggerEnter(Collider other)
     {
@@ -66,7 +69,7 @@ public class Bullet : MonoBehaviour
         }   
         else if (other.CompareTag("Target"))
         {
-            StartCoroutine(DestroyBullet(destroyDelay, other.gameObject));
+            StartCoroutine(Damage(destroyDelay, other.gameObject,myHealth.GetDamage()));
         }
 
         else if (other.CompareTag("CanonBall"))
@@ -74,7 +77,16 @@ public class Bullet : MonoBehaviour
             myHealth.ModifyHealth(-1);
             Destroy(other.gameObject);
         }
+    }
 
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Animator enemyAnimator = other.gameObject.GetComponent<Animator>();
+            enemyAnimator.SetBool("Attack", true);
+            StartCoroutine(Damage(destroyDelay, other.gameObject, myHealth.GetDamage()));
+        }
     }
 
     void OnTriggerExit(Collider other)
@@ -85,15 +97,19 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    IEnumerator DestroyBullet(float delay, GameObject otherGameObject)
+    IEnumerator Damage(float delay, GameObject otherGameObject,int damage)
     {
-        isAttacking = true;
+
+        scoreKeeper.ModifyScore(1);
+
+        myAnimator.SetBool("Attack", true);
+
         Health targetHealth = otherGameObject.GetComponent<Health>();
-        targetHealth.ModifyHealth(Mathf.FloorToInt(-myHealth.GetCurrentHealth()));
         
         yield return new WaitForSecondsRealtime(delay);
         
-        myHealth.ModifyHealth(Mathf.FloorToInt(-myHealth.GetCurrentHealth()));
+        targetHealth.ModifyHealth(-damage);
+        myHealth.ModifyHealth(-damage);
     }
 
     

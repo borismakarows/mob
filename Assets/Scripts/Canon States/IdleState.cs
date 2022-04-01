@@ -19,23 +19,16 @@ public class IdleState : CanonState
             parent.Rotator.rotation = Quaternion.RotateTowards(parent.Rotator.rotation, parent.DefaultRotation, Time.deltaTime * parent.RotationSpeed);
         }
 
-        if (parent.targets.Length > 0)
-        {
-            for (int i = 0; parent.Target == null && i < parent.targets.Length; i++)
-            {
-
-                bool inBounds = parent.targets[i].transform.position.z > parent.minBoundz &&
-                                parent.targets[i].transform.position.z < parent.maxBoundZ;
-
-                if (inBounds)
-                {
-                    parent.Target = parent.targets[i].transform;
-                }
-            }
-        }
-
 
         if (parent.Target != null) { parent.ChangeState(new FindTargetState()); }
 
+    }
+
+    public override void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            parent.Target = other.transform;
+        }
     }
 }

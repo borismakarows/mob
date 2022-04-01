@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject levelCanvas;
     [SerializeField] GameObject mainMenuCanvas;
     [SerializeField] TextMeshProUGUI scoreTMP;
+    [SerializeField] Button level2;
     ScoreKeeper scoreKeeper;
+   
+    
 
     void Awake()
     {
         DefaultMenu();
+        
     }
 
     void Start()

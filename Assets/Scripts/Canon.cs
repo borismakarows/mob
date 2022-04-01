@@ -11,11 +11,6 @@ public class Canon : MonoBehaviour
 
     public Quaternion DefaultRotation { get; set; }
 
-    public Bullet[] targets;
-
-    [Header("Bounds")]
-    public float minBoundz = -5.55f;
-    public float maxBoundZ = 23.87f;
 
     [Header("Aim")]
     [SerializeField] float rotationSpeed;
@@ -47,7 +42,6 @@ public class Canon : MonoBehaviour
 
     void Update()
     {
-        targets = FindObjectsOfType<Bullet>();
         currentState.Update();
     }
 

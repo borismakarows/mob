@@ -68,9 +68,9 @@ public class PlayerMovement : MonoBehaviour
                 Vector3 instancePos = new Vector3(transform.position.x + bulletDistanceToPlayer.x,
                                                    transform.position.y + bulletDistanceToPlayer.y,
                                                    transform.position.z + bulletDistanceToPlayer.z);
-                
-                if (touch.phase == UnityEngine.TouchPhase.Began &&
-                    playerUI.ultiSlider.value == playerUI.ultiSlider.maxValue)
+
+                if (playerUI.ultiSlider.value == playerUI.ultiSlider.maxValue &&
+                    touch.phase == UnityEngine.TouchPhase.Began)
                 {
                     playerUI.ResetSliderPoint();
                     Instantiate(bigBullet, instancePos, Quaternion.identity, bulletsParent.transform);

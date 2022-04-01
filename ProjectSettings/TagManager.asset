@@ -10,6 +10,8 @@ TagManager:
   - Target
   - CanonBall
   - Ground
+  - Enemy
+  - Border
   layers:
   - Default
   - TransparentFX

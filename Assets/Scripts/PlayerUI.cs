@@ -13,7 +13,6 @@ public class PlayerUI : MonoBehaviour
     void Awake()
     {
         player = GetComponent<PlayerMovement>();
-        
     }
 
     void Update()
@@ -31,15 +30,8 @@ public class PlayerUI : MonoBehaviour
         
         sliders[1].gameObject.SetActive(transform.position.x >= midPoint);
 
-        if (sliders[0].IsActive())
-        {
-            ultiSlider = sliders[0];
-        }
-
-        else
-        {
-            ultiSlider = sliders[1];
-        }
+        sliders[0].value = ultiSlider.value;
+        sliders[1].value = ultiSlider.value;
     }
 
 
