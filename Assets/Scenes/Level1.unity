@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.6037736, g: 0.41808474, b: 0.4671257, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1.2
+  m_AmbientIntensity: 1.7
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.8313726, g: 0.8313726, b: 0.8235295, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: e44ac5531b07da84191ff34d32348dc9, type: 2}
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.14509694, g: 0.21770346, b: 0.32918286, a: 1}
+  m_IndirectSpecularColor: {r: 0.14287217, g: 0.21395832, b: 0.34702805, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -236,11 +236,9 @@ MonoBehaviour:
   waveConfigs:
   - {fileID: 11400000, guid: 6411815c2dd421841a61e131a857d355, type: 2}
   - {fileID: 11400000, guid: 6c98a30de4dceb244a21ffdd6aa3c83e, type: 2}
-  timeBetweenWaves: 5
+  timeBetweenWaves: 2
   isLooping: 1
   spawnOffset: {x: 0, y: 0.15, z: 0}
-  minBoundZ: 0
-  maxBoundZ: 0
 --- !u!4 &122765957
 Transform:
   m_ObjectHideFlags: 0
@@ -253,7 +251,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &130797544
 GameObject:
@@ -2093,7 +2091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3075064753235687912, guid: 416a3e7f9d3fc4743af836198beead45, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3075064753235687912, guid: 416a3e7f9d3fc4743af836198beead45, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2233,7 +2231,7 @@ RectTransform:
   - {fileID: 5759670723409716606}
   - {fileID: 594448663836534374}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2634,13 +2632,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411715589}
-  m_LocalRotation: {x: -0.34597728, y: -0.3948273, z: 0.83526343, w: -0.16354273}
+  m_LocalRotation: {x: -0.36958244, y: -0.53734875, z: 0.7515384, w: -0.09927343}
   m_LocalPosition: {x: 0, y: 11.84, z: -36.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 129.4, y: -225, z: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 118.229996, y: -251.597, z: -31.617004}
 --- !u!1 &1421889379
 GameObject:
   m_ObjectHideFlags: 0
@@ -3094,7 +3092,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4446660056596263897, guid: 52e997b82095130418343580ad1417b6, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4446660056596263897, guid: 52e997b82095130418343580ad1417b6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3629,7 +3627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8387722278184352990, guid: a7292ea3fc624a24098347016b873da1, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8387722278184352990, guid: a7292ea3fc624a24098347016b873da1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11509,7 +11507,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1190430255616309170}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.15}
+  m_LocalPosition: {x: 0, y: 0, z: -0.09}
   m_LocalScale: {x: 0.013202328, y: 0.013202328, z: 0.013202328}
   m_Children:
   - {fileID: 4613579614351660348}
@@ -11518,7 +11516,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.62, y: 1.19}
+  m_AnchoredPosition: {x: -0.62, y: 1.08}
   m_SizeDelta: {x: 400.2725, y: 336.0499}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &1766577953507112852

@@ -44,12 +44,15 @@ public class Health : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            if (gameObject.CompareTag("Bullet") && canon.Target.gameObject == gameObject)
+            if (canon.Target != null ^ gameObject != null)
             {
-                canon.Target = null;
+                if (gameObject.CompareTag("Bullet") && canon.Target.gameObject == gameObject)
+                {
+                    canon.Target = null;
+                }
             }
 
-            if (gameObject.CompareTag("Target"))
+            else if (gameObject.CompareTag("Target"))
             {
                 gamePlayUI.Won();
             }

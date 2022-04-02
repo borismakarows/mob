@@ -39,7 +39,8 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        if (target == null) { return; } 
+        if (target == null) { return; }
+
         transform.position = Vector3.MoveTowards(transform.position, target.transform.position, bulletSpeed * Time.deltaTime);
     }
 

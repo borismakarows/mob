@@ -52,9 +52,10 @@ public class GamePlayUI : MonoBehaviour
 
     public void Lose()
     {
-        Time.timeScale = 0;
+        scoreKeeper.ResetScore();
         loseCanvas.SetActive(true);
         inGameCanvas.SetActive(false);
+        Time.timeScale = 0;
     }
 
     void DefaultCanvas()
@@ -66,7 +67,6 @@ public class GamePlayUI : MonoBehaviour
 
     public void NextLevel()
     {
-        
         Time.timeScale = 1;
         gameManager.LoadSceneIndex(SceneManager.GetActiveScene().buildIndex + 1);
     }

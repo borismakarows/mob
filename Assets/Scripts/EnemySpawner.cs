@@ -8,13 +8,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float timeBetweenWaves = 0f;
     [SerializeField] bool isLooping;
     [SerializeField] Vector3 spawnOffset;
-    [SerializeField] float minBoundZ;
-    [SerializeField] float maxBoundZ;
-
     
-
     WaveConfigSO currentWave;
-
 
     void Start()
     {

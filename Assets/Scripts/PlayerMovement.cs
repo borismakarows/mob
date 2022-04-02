@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Vector3 bulletDistanceToPlayer;
     [SerializeField] float bulletDelay;
     float bulletDelayAtStart;
+    
     GameObject bulletsParent;
 
 
@@ -62,29 +63,6 @@ public class PlayerMovement : MonoBehaviour
         {
             touch = Input.GetTouch(0);
             bulletDelay -= Time.deltaTime;
-            if (bulletDelay < 0)
-            {
-
-                Vector3 instancePos = new Vector3(transform.position.x + bulletDistanceToPlayer.x,
-                                                   transform.position.y + bulletDistanceToPlayer.y,
-                                                   transform.position.z + bulletDistanceToPlayer.z);
-
-                if (playerUI.ultiSlider.value == playerUI.ultiSlider.maxValue &&
-                    touch.phase == UnityEngine.TouchPhase.Began)
-                {
-                    playerUI.ResetSliderPoint();
-                    Instantiate(bigBullet, instancePos, Quaternion.identity, bulletsParent.transform);
-                }
-                
-                else
-                {
-                    playerUI.AddUltiPoint(10);
-                    Instantiate(bullet, instancePos, Quaternion.identity, bulletsParent.transform);
-                }
-                
-                bulletDelay = bulletDelayAtStart;
-
-            }
 
             if (touch.phase == UnityEngine.TouchPhase.Moved)
             {
@@ -94,6 +72,34 @@ public class PlayerMovement : MonoBehaviour
                     transform.position.y,
                     transform.position.z);
             }
+
+
+            if (playerUI.ultiSlider.value == playerUI.ultiSlider.maxValue &&
+                    touch.phase == UnityEngine.TouchPhase.Began)
+            {
+                Vector3 instancePos = new Vector3(transform.position.x + bulletDistanceToPlayer.x,
+                                                   transform.position.y + bulletDistanceToPlayer.y,
+                                                   transform.position.z + bulletDistanceToPlayer.z);
+
+                playerUI.ResetSliderPoint();
+                Instantiate(bigBullet, instancePos, Quaternion.Euler(new Vector3(0,2.4f,0)), bulletsParent.transform);
+            }
+
+
+            else if (bulletDelay < 0)
+            {
+
+                Vector3 instancePos = new Vector3(transform.position.x + bulletDistanceToPlayer.x,
+                                                   transform.position.y + bulletDistanceToPlayer.y,
+                                                   transform.position.z + bulletDistanceToPlayer.z);
+
+                playerUI.AddUltiPoint(10);
+                Instantiate(bullet, instancePos, Quaternion.identity, bulletsParent.transform);
+
+                bulletDelay = bulletDelayAtStart;
+            }
+
+            
         }
         else if (Input.touchCount == 0)
         {
